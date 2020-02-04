@@ -4,7 +4,8 @@
     <title>hexo博客搭建笔记</title>
     <url>/archives/c8c150f1.html</url>
     <content><![CDATA[<p>该文记录了搭建hexo博客时候的一些问题</p>
-<p>&lt;–!more–&gt;</p>
+<a id="more"></a>
+
 <h2 id="新建categories页面"><a href="#新建categories页面" class="headerlink" title="新建categories页面"></a>新建categories页面</h2><ol>
 <li><p>在hexo（这时blog目录，根据自己定义的来）使用指令新建categories包</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">hexo</span> <span class="string">new</span> <span class="string">page</span> <span class="string">categories</span></span><br></pre></td></tr></table></figure>
