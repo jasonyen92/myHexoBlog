@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="117.50.95.243/"/>
-  <updated>2020-02-03T14:47:41.318Z</updated>
+  <updated>2020-02-04T12:28:43.484Z</updated>
   <id>117.50.95.243/</id>
   
   <author>
@@ -17,25 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>随笔</title>
-    <link href="117.50.95.243/archives/f77810a8.html"/>
-    <id>117.50.95.243/archives/f77810a8.html</id>
-    <published>2020-02-03T14:47:41.320Z</published>
-    <updated>2020-02-03T14:47:41.318Z</updated>
+    <title>hexo博客搭建笔记</title>
+    <link href="117.50.95.243/archives/c8c150f1.html"/>
+    <id>117.50.95.243/archives/c8c150f1.html</id>
+    <published>2020-02-04T12:28:43.484Z</published>
+    <updated>2020-02-04T12:28:43.484Z</updated>
     
-    <content type="html"><![CDATA[<p>平时学习中，遇到的一些盲区知识点的记录</p><a id="more"></a><h2 id="github精准查找开源项目"><a href="#github精准查找开源项目" class="headerlink" title="github精准查找开源项目"></a>github精准查找开源项目</h2><p>in:name example 名字中有“example”</p><p>in:readme example readme中有“example”</p><p>in:description example 描述中有“example”</p><p>stars:&gt;1000 star&gt;1000</p><p>forks:&gt;1000 fork&gt;1000</p><p>pushed:&gt;2019-09-01 2019年9月1日后有更新的</p><p>language:java 用Java编写的项目 </p><hr><h2 id="Linux（CentOS）安装Node-JS和npm的两种方式"><a href="#Linux（CentOS）安装Node-JS和npm的两种方式" class="headerlink" title="Linux（CentOS）安装Node.JS和npm的两种方式"></a>Linux（CentOS）安装Node.JS和npm的两种方式</h2><h4 id="yum安装"><a href="#yum安装" class="headerlink" title="yum安装"></a>yum安装</h4><p>yum安装是将yum源中的rpm包下载到本地，安装这个rpm包。这个rpm包是别人编译安装好的二进制包。这种方式方便快捷，特别是不用考虑包依赖</p><ol><li>了解linux版本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过  uname -a  命令查看到我的Linux系统位数是64位（备注：x86_64表示64位系统， i686 i386表示32位系统）</span><br></pre></td></tr></table></figure></li><li>添加 epel 源</li></ol><p>64位:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh http:&#x2F;&#x2F;download.fedoraproject.org&#x2F;pub&#x2F;epel&#x2F;6&#x2F;x86_64&#x2F;epel-release-6-8.noarch.rpm</span><br></pre></td></tr></table></figure><p>32位:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh http:&#x2F;&#x2F;download.fedoraproject.org&#x2F;pub&#x2F;epel&#x2F;6&#x2F;i386&#x2F;epel-release-6-8.noarch.rpm</span><br></pre></td></tr></table></figure><ol start="3"><li>导入key<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm --import &#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-EPEL-6</span><br></pre></td></tr></table></figure></li><li>添加 remi 源<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh http:&#x2F;&#x2F;rpms.famillecollet.com&#x2F;enterprise&#x2F;remi-release-6.rpm</span><br><span class="line">rpm --import &#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-remi</span><br></pre></td></tr></table></figure></li><li>安装完成后，执行<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl --silent --location https:&#x2F;&#x2F;rpm.nodesource.com&#x2F;setup_5.x | bash -</span><br><span class="line">yum -y install nodejs</span><br></pre></td></tr></table></figure></li><li>检查Node.js和npm版本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure><h4 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h4>源码安装，下载是源码包，要进行编译和安装，编译过程，可以进行参数设定。这种方式灵活性比较大，版本/参数可以自己选择。</li><li>创建目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;opt</span><br><span class="line">mkdir node.js</span><br><span class="line">cd node.js</span><br></pre></td></tr></table></figure></li><li>去官网下载安装包或者用wget下载<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;nodejs.org&#x2F;dist&#x2F;v9.8.0&#x2F;node-v9.8.0-linux-x64.tar.xz</span><br></pre></td></tr></table></figure></li><li>解压安装包<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xz -d node-v9.8.0-linux-x64.tar.xz</span><br><span class="line">tar -xvf node-v9.8.0-linux-x64.tar</span><br></pre></td></tr></table></figure></li><li>进入目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd node-v9.8.0-linux-x64</span><br></pre></td></tr></table></figure></li><li>软链接<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s &#x2F;opt&#x2F;nodejs&#x2F;node-v9.8.0-linux-x64&#x2F;bin&#x2F;node &#x2F;usr&#x2F;local&#x2F;bin&#x2F;node</span><br><span class="line">ln -s &#x2F;opt&#x2F;nodejs&#x2F;node-v9.8.0-linux-x64&#x2F;bin&#x2F;npm &#x2F;usr&#x2F;local&#x2F;bin&#x2F;npm</span><br></pre></td></tr></table></figure></li><li>测试Node.js和npm版本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure></li><li>配置淘宝npm镜像<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">由于官方镜像比较慢，直接执行以下命令，将镜像地址改为淘宝的npm镜像地址</span><br><span class="line">npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    <content type="html"><![CDATA[<p>该文记录了搭建hexo博客时候的一些问题</p><p>&lt;–!more–&gt;</p><h2 id="新建categories页面"><a href="#新建categories页面" class="headerlink" title="新建categories页面"></a>新建categories页面</h2><ol><li><p>在hexo（这时blog目录，根据自己定义的来）使用指令新建categories包</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">hexo</span> <span class="string">new</span> <span class="string">page</span> <span class="string">categories</span></span><br></pre></td></tr></table></figure></li></ol><ol start="2"><li><p>然后到/hexo/source目录下，会多一个categories的目录，目录里面有一个index.md的文件，编辑此文件</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">文章分类</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"categories"</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020</span><span class="number">-02</span><span class="number">-03</span> <span class="number">00</span><span class="string">:00:00</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span>  </span><br><span class="line"><span class="attr">layout:</span> <span class="string">"categories"</span></span><br></pre></td></tr></table></figure></li></ol><ol start="3"><li><p>编辑主题下的配置文件<strong><code>themes/next/_config.yml</code></strong>，修改为如下</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span></span><br><span class="line">  <span class="comment">#about: /about/|| user</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/||</span> <span class="string">tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/||</span> <span class="string">th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/||</span> <span class="string">archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/|| calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml|| sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/|| heartbeat</span></span><br></pre></td></tr></table></figure></li></ol><p>把你需要的前面的#号去掉，<code>注意</code>，官方的/与||之间有空格，要删除，否则categories页面打不开。</p><h2 id="页面底部来访次数和人数不显示问题"><a href="#页面底部来访次数和人数不显示问题" class="headerlink" title="## 页面底部来访次数和人数不显示问题"></a>## 页面底部来访次数和人数不显示问题</h2><p>由于不蒜子的url更新了，所以js文件引用失效，所以只需要更改下js文件里的引用就行。进入/hexo/themes/next/layout/_third-partyanalytics下，有的可能在这个目录下，有的可能在目录下的其他文件夹下，找到<code>busuanzi-counter.swig</code>文件，将</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;script</span> <span class="string">async</span> <span class="string">src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"&gt;&lt;/script&gt;</span></span><br></pre></td></tr></table></figure><p>替换成</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;script</span> <span class="string">async</span> <span class="string">src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"&gt;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure><p>即可！</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;平时学习中，遇到的一些盲区知识点的记录&lt;/p&gt;
+      
+      
+        &lt;p&gt;该文记录了搭建hexo博客时候的一些问题&lt;/p&gt;
+&lt;p&gt;&amp;lt;–!more–&amp;gt;&lt;/p&gt;
+&lt;h2 id=&quot;新建categories页面&quot;&gt;&lt;a href=&quot;#新建categories页面&quot; class=&quot;headerlink&quot; title=&quot;新建categories页
+      
     
     </summary>
     
     
+      <category term="笔记" scheme="117.50.95.243/categories/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="HTML" scheme="117.50.95.243/tags/HTML/"/>
+      <category term="linux" scheme="117.50.95.243/categories/%E7%AC%94%E8%AE%B0/linux/"/>
     
-      <category term="前端" scheme="117.50.95.243/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="博客" scheme="117.50.95.243/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="linux" scheme="117.50.95.243/tags/linux/"/>
+    
+      <category term="hexo" scheme="117.50.95.243/tags/hexo/"/>
     
   </entry>
   
@@ -56,9 +67,9 @@
     
     
     
-      <category term="hadoop" scheme="117.50.95.243/tags/hadoop/"/>
-    
       <category term="linux" scheme="117.50.95.243/tags/linux/"/>
+    
+      <category term="hadoop" scheme="117.50.95.243/tags/hadoop/"/>
     
   </entry>
   

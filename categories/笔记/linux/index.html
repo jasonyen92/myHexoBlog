@@ -90,7 +90,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="殷小强的博客">
-<meta property="og:url" content="117.50.95.243/index.html">
+<meta property="og:url" content="117.50.95.243/categories/%E7%AC%94%E8%AE%B0/linux/index.html">
 <meta property="og:site_name" content="殷小强的博客">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="殷小强">
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="117.50.95.243/"/>
+  <link rel="canonical" href="117.50.95.243/categories/笔记/linux/"/>
 
 
 
 
 
-  <title>殷小强的博客</title>
+  <title>Category: linux | 殷小强的博客</title>
   
 
 
@@ -152,8 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -280,317 +279,56 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
-    
+
+  
+  
+  
+  <div class="post-block category">
+
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>linux<small>Category</small>
+        </h1>
+      </div>
+
       
-
-  
-
-  
-  
-  
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="117.50.95.243/archives/c8c150f1.html">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="殷小强">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/yin.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="殷小强的博客">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/archives/c8c150f1.html" itemprop="url">hexo博客搭建笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+            <a class="post-title-link" href="/archives/c8c150f1.html" itemprop="url">
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span itemprop="name">hexo博客搭建笔记</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-04T20:28:43+08:00">
-                2020-02-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">笔记</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AC%94%E8%AE%B0/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>该文记录了搭建hexo博客时候的一些问题</p>
-<p>&lt;–!more–&gt;</p>
-<h2 id="新建categories页面"><a href="#新建categories页面" class="headerlink" title="新建categories页面"></a>新建categories页面</h2><ol>
-<li><p>在hexo（这时blog目录，根据自己定义的来）使用指令新建categories包</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">hexo</span> <span class="string">new</span> <span class="string">page</span> <span class="string">categories</span></span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<ol start="2">
-<li><p>然后到/hexo/source目录下，会多一个categories的目录，目录里面有一个index.md的文件，编辑此文件</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">文章分类</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"categories"</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2020</span><span class="number">-02</span><span class="number">-03</span> <span class="number">00</span><span class="string">:00:00</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span>  </span><br><span class="line"><span class="attr">layout:</span> <span class="string">"categories"</span></span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<ol start="3">
-<li><p>编辑主题下的配置文件<strong><code>themes/next/_config.yml</code></strong>，修改为如下</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span></span><br><span class="line">  <span class="comment">#about: /about/|| user</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/||</span> <span class="string">tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/||</span> <span class="string">th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/||</span> <span class="string">archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/|| calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml|| sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/|| heartbeat</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>把你需要的前面的#号去掉，<code>注意</code>，官方的/与||之间有空格，要删除，否则categories页面打不开。</p>
-<h2 id="页面底部来访次数和人数不显示问题"><a href="#页面底部来访次数和人数不显示问题" class="headerlink" title="## 页面底部来访次数和人数不显示问题"></a>## 页面底部来访次数和人数不显示问题</h2><p>由于不蒜子的url更新了，所以js文件引用失效，所以只需要更改下js文件里的引用就行。进入/hexo/themes/next/layout/_third-partyanalytics下，有的可能在这个目录下，有的可能在目录下的其他文件夹下，找到<code>busuanzi-counter.swig</code>文件，将</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;script</span> <span class="string">async</span> <span class="string">src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"&gt;&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>替换成</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;script</span> <span class="string">async</span> <span class="string">src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"&gt;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>即可！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="117.50.95.243/archives/546334a.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="殷小强">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/yin.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="殷小强的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/archives/546334a.html" itemprop="url">linux环境搭建hadoop集群</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-03T22:22:15+08:00">
-                2020-02-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>mac系统使用centOS7虚拟机搭建hadoop集群</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/archives/546334a.html#more" rel="contents">
-              Read more &raquo;
             </a>
-          </div>
-          <!--/noindex-->
         
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-02-04T20:28:43+08:00"
+              content="2020-02-04" >
+          02-04
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
       
     </div>
-    
-    
-    
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
   
   
   
-  </article>
-
-
-    
-  </section>
 
   
+
 
 
           </div>
