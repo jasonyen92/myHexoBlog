@@ -1,6 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Halo博客源码阅读整理</title>
+    <url>/archives/b19457a3.html</url>
+    <content><![CDATA[<p>阅读Halo博客源码，自己整理的一些知识盲点</p>
+<a id="more"></a>
+
+<h2 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h2><ol>
+<li><p>Optional是一个容器对象，可能包含也可能不包含非空值，可以用<code>is Present()</code>方法判断是否有非空值，如果有的话，则返回<code>true</code>，可以用<code>get()</code>方法获取该值。</p>
+</li>
+<li><p>获取对象的方法有3种</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. 返回一个空的optional实例，没有值</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>&lt;T&gt; Optional&lt;T&gt; <span class="title">empty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">        Optional&lt;T&gt; t = (Optional&lt;T&gt;) EMPTY;</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 返回指定的当前非空值的optional，入参value不能为空，否则报空指针</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Optional&lt;T&gt; <span class="title">of</span><span class="params">(T value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Optional&lt;&gt;(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3. 如果value为null，则返回空的optional，否则返回指定的当前非空值的optional</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Optional&lt;T&gt; <span class="title">ofNullable</span><span class="params">(T value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value == <span class="keyword">null</span> ? empty() : of(value);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>举例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//调用empty方法获取获取optional实例</span></span><br><span class="line">    Optional&lt;Object&gt; empty = Optional.empty();</span><br><span class="line">    System.out.println(<span class="string">"empty:"</span>+empty);</span><br><span class="line">    System.out.println(<span class="string">"empty.get():"</span>+empty.get());</span><br></pre></td></tr></table></figure>
+
+<p>当输出empty时，控制台输出为：empty:Optional.empty</p>
+<p>当输出empty.get()时，控制台输出为：java.util.NoSuchElementException: No value present</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//调用ofNullable获取optional实例</span></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    Optional&lt;Integer&gt; o = Optional.ofNullable(a);</span><br><span class="line">    System.out.println(<span class="string">"o:"</span>+o);</span><br><span class="line">    System.out.println(<span class="string">"o.get():"</span>+o.get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当输出o时，控制台输出为：o:Optional[10]</p>
+<p>当输出o.get()时，控制台输出为：o.get():10</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//调用of方法获取optional实例</span></span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">    Optional&lt;Integer&gt; argB = Optional.of(b);</span><br><span class="line">    System.out.println(<span class="string">"argB:"</span>+argB);</span><br><span class="line">    System.out.println(<span class="string">"argB.get():"</span>+argB.get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当输出B时，控制台输出为：argB:Optional[10]</p>
+<p>当输出B.get()时，控制台输出为：argB.get():10</p>
+</li>
+<li><p>ifPresent方法的使用</p>
+<p>首先看源码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * If a value is present, invoke the specified consumer with the value,</span></span><br><span class="line"><span class="comment"> * otherwise do nothing.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> consumer block to be executed if a value is present</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> NullPointerException if value is present and &#123;<span class="doctag">@code</span> consumer&#125; is</span></span><br><span class="line"><span class="comment"> * null</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ifPresent</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> T&gt; consumer)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (value != <span class="keyword">null</span>)</span><br><span class="line">        consumer.accept(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果value值存在，使用值调用指定的使用者，如果不存在，则什么都不做。如果consumer为null但是value值存在，则会报<code>空指针</code>。</p>
+<p>下面来看实例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//ifPresent方法的使用</span></span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    Optional&lt;User&gt; optionalUser = Optional.ofNullable(user);</span><br><span class="line">    optionalUser.ifPresent((age)-&gt;age.setAge(<span class="string">"10"</span>));</span><br><span class="line">    System.out.println(optionalUser.get().getAge());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义一个User对象，将User对象放到Optional容器中，如果容器中有User对象的存在,则给User对象中的age字段赋值为10,然后从容器中获取User对象并获取对象的age属性，控制台输出 10</p>
+</li>
+<li><p>filter方法的使用</p>
+<p>首先看源码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * If a value is present, and the value matches the given predicate,</span></span><br><span class="line"><span class="comment">     * return an &#123;<span class="doctag">@code</span> Optional&#125; describing the value, otherwise return an</span></span><br><span class="line"><span class="comment">     * empty &#123;<span class="doctag">@code</span> Optional&#125;.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> predicate a predicate to apply to the value, if present</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> an &#123;<span class="doctag">@code</span> Optional&#125; describing the value of this &#123;<span class="doctag">@code</span> Optional&#125;</span></span><br><span class="line"><span class="comment">     * if a value is present and the value matches the given predicate,</span></span><br><span class="line"><span class="comment">     * otherwise an empty &#123;<span class="doctag">@code</span> Optional&#125;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> NullPointerException if the predicate is null</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Optional&lt;T&gt; <span class="title">filter</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; predicate)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(predicate);</span><br><span class="line">        <span class="keyword">if</span> (!isPresent())</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> predicate.test(value) ? <span class="keyword">this</span> : empty();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>检查value对象是否满足给定的条件，如果条件为null的话，会报<code>空指针</code>,如果和给定的条件匹配，则返回新的一个optional对象，和之前的一样，否则为空optional。</p>
+<p>看例子：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//filter方法的使用</span></span><br><span class="line">        User user = <span class="keyword">new</span> User();</span><br><span class="line">        Optional&lt;User&gt; optionalUser = Optional.ofNullable(user);</span><br><span class="line">        user.setAge(<span class="string">"10"</span>);</span><br><span class="line">        Optional&lt;User&gt; optionalUser1 = optionalUser.filter(user1 -&gt; user.getAge().equals(<span class="string">"10"</span>));</span><br><span class="line">        System.out.println(<span class="string">"optionalUser1:"</span>+optionalUser1);</span><br><span class="line">        System.out.println(<span class="string">"optionalUser1.get():"</span>+optionalUser1.get());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>控制台输出为</p>
+<p><img src="http://q59oehxub.bkt.clouddn.com/optional.filter%E6%96%B9%E6%B3%95.png" alt="optional.filter方法"></p>
+</li>
+<li><p>map方法</p>
+<p>先看源码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * If a value is present, apply the provided mapping function to it,</span></span><br><span class="line"><span class="comment"> * and if the result is non-null, return an &#123;<span class="doctag">@code</span> Optional&#125; describing the</span></span><br><span class="line"><span class="comment"> * result.  Otherwise return an empty &#123;<span class="doctag">@code</span> Optional&#125;.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@apiNote</span> This method supports post-processing on optional values, without</span></span><br><span class="line"><span class="comment"> * the need to explicitly check for a return status.  For example, the</span></span><br><span class="line"><span class="comment"> * following code traverses a stream of file names, selects one that has</span></span><br><span class="line"><span class="comment"> * not yet been processed, and then opens that file, returning an</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@code</span> Optional&lt;FileInputStream&gt;&#125;:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt;&#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> *     Optional&lt;FileInputStream&gt; fis =</span></span><br><span class="line"><span class="comment"> *         names.stream().filter(name -&gt; !isProcessedYet(name))</span></span><br><span class="line"><span class="comment"> *                       .findFirst()</span></span><br><span class="line"><span class="comment"> *                       .map(name -&gt; new FileInputStream(name));</span></span><br><span class="line"><span class="comment"> * &#125;&lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Here, &#123;<span class="doctag">@code</span> findFirst&#125; returns an &#123;<span class="doctag">@code</span> Optional&lt;String&gt;&#125;, and then</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@code</span> map&#125; returns an &#123;<span class="doctag">@code</span> Optional&lt;FileInputStream&gt;&#125; for the desired</span></span><br><span class="line"><span class="comment"> * file if one exists.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &lt;U&gt; The type of the result of the mapping function</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> mapper a mapping function to apply to the value, if present</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> an &#123;<span class="doctag">@code</span> Optional&#125; describing the result of applying a mapping</span></span><br><span class="line"><span class="comment"> * function to the value of this &#123;<span class="doctag">@code</span> Optional&#125;, if a value is present,</span></span><br><span class="line"><span class="comment"> * otherwise an empty &#123;<span class="doctag">@code</span> Optional&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> NullPointerException if the mapping function is null</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span>&lt;U&gt; Optional&lt;U&gt; <span class="title">map</span><span class="params">(Function&lt;? <span class="keyword">super</span> T, ? extends U&gt; mapper)</span> </span>&#123;</span><br><span class="line">    Objects.requireNonNull(mapper);</span><br><span class="line">    <span class="keyword">if</span> (!isPresent())</span><br><span class="line">        <span class="keyword">return</span> empty();</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Optional.ofNullable(mapper.apply(value));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大致意思是，可以用传进来的对象作为参数，进行其他操作，哪怕返回的是其他对象。</p>
+<p>看例子：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    Optional&lt;User&gt; optionalUser = Optional.ofNullable(user);</span><br><span class="line">    user.setAge(<span class="string">"10"</span>);</span><br><span class="line">    Optional&lt;String&gt; string = optionalUser.map((age) -&gt; user.getAge());</span><br><span class="line">    System.out.println(<span class="string">"string:"</span>+string);</span><br><span class="line">    System.out.println(<span class="string">"string.get():"</span>+string.get());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用了传进来的user对象的age字段的值，返回的却是个string。</p>
+<p>看控制台输出：</p>
+<p><img src="http://q59oehxub.bkt.clouddn.com/2020-02-06-095929.png" alt="optional.map方法"></p>
+</li>
+</ol>
+<h1 id="未完待续！！！"><a href="#未完待续！！！" class="headerlink" title="未完待续！！！"></a>未完待续！！！</h1>]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>源码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo博客搭建笔记</title>
     <url>/archives/c8c150f1.html</url>
     <content><![CDATA[<p>该文记录了搭建hexo博客时候的一些问题</p>
@@ -36,7 +105,6 @@
 <p>即可！</p>
 ]]></content>
       <categories>
-        <category>笔记</category>
         <category>linux</category>
       </categories>
       <tags>
@@ -119,6 +187,9 @@
 
 
 ]]></content>
+      <categories>
+        <category>hadoop</category>
+      </categories>
       <tags>
         <tag>linux</tag>
         <tag>hadoop</tag>
