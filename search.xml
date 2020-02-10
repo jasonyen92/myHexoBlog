@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>hadoop权威指南之天气查询案例</title>
+    <url>/archives/255d8b35.html</url>
+    <content><![CDATA[<p>hadoop权威指南第四版第一章天气分析案例</p>
+<a id="more"></a>
+
+<ol>
+<li><p>从github下载源码<a href="https://github.com/tomwhite/hadoop-book/" target="_blank" rel="noopener">https://github.com/tomwhite/hadoop-book/</a></p>
+</li>
+<li><p>用idea打开代码，等加载完成之后，在底部的Terminal里运行READE.md里提示的指令，如图：</p>
+<p><img src="http://q59oehxub.bkt.clouddn.com/2020-02-09-075316.png" alt="hadoop-book打包"></p>
+</li>
+<li><p>从<a href="ftp://ftp.ncdc.noaa.gov/pub/data/noaa/2010/" target="_blank" rel="noopener">ftp://ftp.ncdc.noaa.gov/pub/data/noaa/2010/</a>下载一个天气数据，解压后将格式改为txt文本格式或者自己创建一个txt文本复制进去，自定义命名，这里定义为data.txt</p>
+</li>
+<li><p>通过xshell、finalshell(我这里用的是这个)之类的工具，将data.txt上传到服务器上，此刻我这边的目录为/home/hadoop/hadoop-3.1.3/files/data.txt</p>
+</li>
+<li><p>再将源码打成jar包的文件上传到服务器上，在包的根目录下找到hadoop-examples.jar上传到/home/hadoop/hadoop-3.1.3/files/hadoop-examples.jar</p>
+</li>
+<li><p>在hadoop下新建文件夹files，使用命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hdfs dfs -mkdir -p /hadoop/files</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建好文件夹后，将服务器上的这两个文件上传到hadoop的文件夹下，使用命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hdfs dfs -put /home/hadoop/hadoop-3.1.3/files/data.txt /hadoop/files/</span><br><span class="line">hdfs dfs -put /home/hadoop/hadoop-3.1.3/files/hadoop-examples.jar /hadoop/files/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上传完之后，开始运行程序</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hadoop jar hadoop-examples.jar MaxTemperature /hadoop/files/data.txt /hadoop/output</span><br></pre></td></tr></table></figure>
+
+<p>这个output文件是不存在的，如果已经存在的文件夹，运行后会报错</p>
+</li>
+<li><p>运行结束后，使用命令查看输出的文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hdfs dfs -cat  /hadoop/output/part-r-00000</span><br></pre></td></tr></table></figure>
+
+<p>此时，应该会显示</p>
+<p>2010    360</p>
+<p>2010为年份，360为温度</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>hadoop</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>以root用户开启hadoop集群出现问题解决</title>
     <url>/archives/a800b01e.html</url>
     <content><![CDATA[<p>以root用户开启hadoop集群出现问题解决</p>
@@ -24,6 +70,37 @@
       <tags>
         <tag>linux</tag>
         <tag>hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决github打开慢下载慢的问题</title>
+    <url>/archives/82133d88.html</url>
+    <content><![CDATA[<p>解决github打开慢登录慢问题</p>
+<a id="more"></a>
+
+<ol>
+<li><p>在hosts文件中追加ip地址，可以在<a href="https://www.ipaddress.com/地址中查询github的ip，分别查询：" target="_blank" rel="noopener">https://www.ipaddress.com/地址中查询github的ip，分别查询：</a></p>
+<p>(1) github.com</p>
+<p>(2) github.global.ssl.fastly.net</p>
+</li>
+</ol>
+<p>将查出的ip添加到hosts文件中保存，hosts文件在/etc目录下（mac系统）</p>
+<ol start="2">
+<li><p>刷新DNS缓存，在终端中输入</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; say DNS cache flushed</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>github</category>
+      </categories>
+      <tags>
+        <tag>github</tag>
       </tags>
   </entry>
   <entry>
@@ -66,37 +143,6 @@
       <tags>
         <tag>linux</tag>
         <tag>VMFusion</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解决github打开慢下载慢的问题</title>
-    <url>/archives/82133d88.html</url>
-    <content><![CDATA[<p>解决github打开慢登录慢问题</p>
-<a id="more"></a>
-
-<ol>
-<li><p>在hosts文件中追加ip地址，可以在<a href="https://www.ipaddress.com/地址中查询github的ip，分别查询：" target="_blank" rel="noopener">https://www.ipaddress.com/地址中查询github的ip，分别查询：</a></p>
-<p>(1) github.com</p>
-<p>(2) github.global.ssl.fastly.net</p>
-</li>
-</ol>
-<p>将查出的ip添加到hosts文件中保存，hosts文件在/etc目录下（mac系统）</p>
-<ol start="2">
-<li><p>刷新DNS缓存，在终端中输入</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; say DNS cache flushed</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>github</category>
-      </categories>
-      <tags>
-        <tag>github</tag>
       </tags>
   </entry>
   <entry>
